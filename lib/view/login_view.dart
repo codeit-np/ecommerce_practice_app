@@ -1,13 +1,16 @@
+import 'package:ecommerce/controller/auth_controller.dart';
 import 'package:ecommerce/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends GetView<AuthController> {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var key = GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -15,6 +18,7 @@ class LoginView extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: Form(
+                key: key,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -24,17 +28,20 @@ class LoginView extends StatelessWidget {
 
                     //w2 Email Text Field
                     TextFormField(
+                      controller: controller.email,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Enter your email',
                         label: Text("Email"),
                         prefixIcon: Icon(Icons.email),
                       ),
+                      validator: (value) => value!.isEmpty ? 'Email required' : null,
                     ),
 
                     Gap(10),
                     //w2 Password Text Field
                     TextFormField(
+                      controller: controller.password,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Enter your password',
@@ -46,6 +53,8 @@ class LoginView extends StatelessWidget {
                         ),
                       ),
                       obscureText: true,
+                      validator: (value) => value!.isEmpty ? 'Password required' : null,
+
                     ),
 
                     Gap(10),
@@ -62,7 +71,14 @@ class LoginView extends StatelessWidget {
                       width: double.infinity,
                       height: 50,
                       child: FilledButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          if(key.currentState!.validate()){
+                            Loader.show(context);
+                            await controller.login();
+                            Loader.hide();
+
+                          }
+                        },
                         child: Text("Login"),
                       ),
                     ),
