@@ -40,7 +40,9 @@ class LoginView extends GetView<AuthController> {
 
                     Gap(10),
                     //w2 Password Text Field
-                    TextFormField(
+
+                    Obx((){
+                      return TextFormField(
                       controller: controller.password,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -48,14 +50,18 @@ class LoginView extends GetView<AuthController> {
                         label: Text("Password"),
                         prefixIcon: Icon(Icons.lock),
                         suffixIcon: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.togglePassword();
+                          },
                           icon: Icon(Icons.visibility),
                         ),
                       ),
-                      obscureText: true,
+                      obscureText: controller.hidePassword.value,
                       validator: (value) => value!.isEmpty ? 'Password required' : null,
 
-                    ),
+                    );
+                    }),
+                    
 
                     Gap(10),
                     //w3 Forgot Password

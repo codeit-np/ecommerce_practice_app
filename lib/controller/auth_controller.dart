@@ -12,6 +12,8 @@ class AuthController extends GetxController {
   var loginMessage = LoginModel(success: false, token: null, message: null).obs;
   var isLoading = false.obs;
 
+  var hidePassword = true.obs;
+
   //Text Editing Controller
   var name = TextEditingController();
   var email = TextEditingController();
@@ -73,6 +75,11 @@ class AuthController extends GetxController {
   void logOut(){
     StorageController().deleteToken();
     Get.offNamed(AppRoutes.login);
+  }
+
+  void togglePassword(){
+    hidePassword.value = !hidePassword.value;
+
   }
 
   @override

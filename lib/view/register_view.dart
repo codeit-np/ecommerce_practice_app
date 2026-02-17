@@ -73,24 +73,9 @@ class RegisterView extends GetView<AuthController> {
 
                      Gap(10),
                     //w2 Password Text Field
-                    TextFormField(
-                      controller: controller.confirm,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Retype password',
-                        label: Text("Confirm Passsword"),
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.visibility),
-                        ),
-                      ),
-                      obscureText: true,
-                      validator: (value) => value!.isEmpty ? 'Confirm Password Required' : null,
+                    
 
-                    ),
-
-                    Gap(10),
+                 
 
                     //w4 Login button
                     SizedBox(
