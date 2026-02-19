@@ -1,6 +1,7 @@
 import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -39,8 +40,9 @@ class ProductView extends GetView<CartController> {
                         )
                       ),
                       onPressed: () {
-                        print("${product.id}");
-                        print("Sajal Shrestha");
+                        Loader.show(context);
+                        controller.addToCard(product.id);
+                        Loader.hide();
                       },
                       child: Text("Add to Cart"),
                     ),

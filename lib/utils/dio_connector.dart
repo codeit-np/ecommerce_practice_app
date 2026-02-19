@@ -6,7 +6,7 @@ class DioConnector {
       baseUrl: "https://ecommerce.codeitappsware.com/api/",
       headers: {
         "Accept" : "application/json",
-        "Content-Type" : "application/json"
+        "Content-Type" : "application/json",
       }
     )
   );

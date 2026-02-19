@@ -4,5 +4,7 @@ class AppRoutes {
   static String register = "/register";
   static String home = "/home";
   static String product = "/product";
+  static String cart = "/cart";
+  static String order = "/order";
 
 }

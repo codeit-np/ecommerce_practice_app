@@ -1,7 +1,7 @@
 import 'package:ecommerce/controller/auth_controller.dart';
+import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/controller/product_controller.dart';
 import 'package:ecommerce/routes/app_routes.dart';
-import 'package:ecommerce/widgets/product_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,10 +12,21 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     var authController = Get.find<AuthController>();
     var productController = Get.find<ProductController>();
+    var cartController = Get.find<CartController>();
     return SafeArea(child: Scaffold(
       appBar: AppBar(
         title: Text("Mero Cart"),
         actions: [
+          InkWell(
+            onTap: (){
+              cartController.getCartItems();
+              Get.toNamed(AppRoutes.cart);
+            },
+            child: Icon(Icons.shopping_cart_outlined)),
+            Obx((){
+              return Text("${cartController.cartItems.value.data.length}");
+            }),
+          
           IconButton(onPressed: (){
             Get.defaultDialog(
               title: "Warning",
